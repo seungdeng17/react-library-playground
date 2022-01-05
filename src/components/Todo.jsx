@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { todoSelector } from "../states/todo";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { todoSelector, todoState } from "../states/todo";
 
 export default function Todo() {
-  const data = useRecoilValue(todoSelector);
+  const initTodo = useRecoilValue(todoSelector);
+  const [todo, setTodo] = useRecoilState(todoState);
+
+  useEffect(() => {
+    setTodo(initTodo);
+  }, []);
 
   // useEffect(() => {
   //   (async function () {
@@ -12,5 +17,5 @@ export default function Todo() {
   //   })();
   // }, []);
 
-  return <div>{data}</div>;
+  return <div>{todo}</div>;
 }

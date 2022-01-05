@@ -9,8 +9,8 @@ import Error from "./components/Error";
 export default function App() {
   return (
     <AppContainer>
-      <ErrorBoundary fallback={Error()}>
-        <Suspense fallback={Loading()}>
+      <ErrorBoundary fallback={<Error />}>
+        <Suspense fallback={<Loading />}>
           <Todo />
         </Suspense>
       </ErrorBoundary>
