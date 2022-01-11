@@ -1,21 +1,26 @@
 import { useState, useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { todoSelector, todoState } from "../states/todo";
+import { postUserInfo } from "../states/todo";
 
 export default function Todo() {
-  const initTodo = useRecoilValue(todoSelector);
-  const [todo, setTodo] = useRecoilState(todoState);
+  const [result, postApi] = useRecoilState(postUserInfo);
+
+  const handleClick = () => {
+    postApi({ id: "test", password: "111111" });
+  };
 
   useEffect(() => {
-    setTodo(initTodo);
-  }, []);
+    console.log(result);
+    if (result) {
+      alert("성공!");
+    } else {
+      // 실패 처리
+    }
 
-  // useEffect(() => {
-  //   (async function () {
-  //     await new Promise((res) => setTimeout(res, 3000));
-  //     setData("데이터지롱");
-  //   })();
-  // }, []);
+    return () => {
+      console.log("component unmount");
+    };
+  }, [result]);
 
-  return <div>{todo}</div>;
+  return <div onClick={handleClick}>Click!</div>;
 }
